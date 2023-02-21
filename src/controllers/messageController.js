@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Message = require("../models/messageModel");
-const Conversation = require("../models/ConversationModel");
+const Conversation = require("../models/conversationModel");
 const { messageValidation } = require("../helpers/validation/messageValidation");
 
 const messageController = {

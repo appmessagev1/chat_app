@@ -1,0 +1,65 @@
+Get http://localhost:8080
+
+################################
+POST http://localhost:8080/v1/auth/sign_up
+content-type: application/json
+
+{
+  "email": "admintest1@gmail.com",
+  "password": "duongtanbjnh2k1",
+  "name": "duongtanbinh",
+  "title": "student"
+}
+
+################################
+
+POST http://localhost:8080/v1/auth/sign_in
+content-type: application/json
+
+{
+  "email": "zailaivu@gmail.com",
+  "password": "duongtanbjnh2k1"
+}
+
+################################
+
+POST http://localhost:8080/v1/auth/refresh_token
+content-type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2YwZGE1MjhhNTQ5YTE5Njc3ZWM5NGEiLCJpYXQiOjE2NzY3Mjg5MjAsImV4cCI6MTY3NjgxNTMyMH0.8iby3UZG2UNVflCen-BmopwWW-u2FZFbbjXhT-tntbo"
+}
+
+################################
+POST http://localhost:8080/v1/messages
+content-type: application/json
+
+{
+  "content": "Hello",
+  "senderId": "63f099d3b94842842b55d608",
+  "conversationId": "63f106688a79323efca3998c"
+}
+
+################################
+GET http://localhost:8080/v1/messages/63f106688a79323efca3998c/get_message_in_conversation
+
+
+################################
+POST http://localhost:8080/v1/conversations
+content-type: application/json
+Authorization: Berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2YwOTlkM2I5NDg0Mjg0MmI1NWQ2MDgiLCJpYXQiOjE2NzY5MDc5NTQsImV4cCI6MTY3NjkwOTc1NH0._j2LHcb-PVWRfaQIx9drXT7BbiYq5pPCxDoKFw7wsv0
+
+{
+  "userId": "63f3927d56d4ace714b32577",
+  "senderId": "63f099d3b94842842b55d608",
+  "lastMessage": "Xin chao tat ca cac ban"
+}
+
+
+################################
+GET http://localhost:8080/v1/conversations/63f099efb94842842b55d60e
+Authorization: Berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2YwOTlkM2I5NDg0Mjg0MmI1NWQ2MDgiLCJpYXQiOjE2NzY4MTgwMzUsImV4cCI6MTY3NjgyMTYzNX0.4-7FUBPu7QQ-ZnQQe4OBpRQJE88B5vxoCBMTWixrtY4
+
+
+################################
+GET http://localhost:8080/v1/users/63f1a72e471d72494d211078

@@ -1,6 +1,6 @@
 const { userSignUpValidate, userSignInValidation } = require("../helpers/validation/userValidation");
 const jwtService = require("../helpers/jwt_service");
-const User = require("../models/UserModel");
+const User = require("../models/userModel");
 const nodemailerService = require("../helpers/nodemailer_service");
 
 const authController = {

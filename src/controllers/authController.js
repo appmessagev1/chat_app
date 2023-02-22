@@ -18,7 +18,7 @@ const authController = {
       await nodemailerService.sendMail(
         email,
         "Verify mail",
-        `<a href="${process.env.API_URL}/v1/auth/verify_email?email=${email || ""}&token=${userToken || ""}">Verify</a>`
+        `<a href="${process.env.SERVER_API_URL}/v1/auth/verify_email?email=${email || ""}&token=${userToken || ""}">Verify</a>`
       );
 
       console.log(`<a href="${process.env.API_URL}/v1/auth/verify_email?email=${email || ""}&token=${userToken || ""}">Verify</a>`);
@@ -105,7 +105,7 @@ const authController = {
         });
         await user.save();
 
-        return res.redirect(`${process.env.API_URL}/sign_in`);
+        return res.redirect(`${process.env.CLIENT_API_URL}/sign_in`);
       }
     } catch (err) {
       return res.status(404).json({ error_code: 102, message: "Invalid input" });

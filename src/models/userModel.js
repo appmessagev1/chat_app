@@ -21,24 +21,28 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: false,
       max: 50,
+      default: "",
     },
 
     avatar: {
       type: String,
       required: false,
       unique: false,
+      default: "",
     },
 
     country: {
       type: String,
       required: false,
       unique: false,
+      default: "",
     },
 
     phoneNumber: {
       type: Number,
       required: false,
       unique: false,
+      default: "",
     },
 
     password: {
@@ -51,6 +55,7 @@ const userSchema = new mongoose.Schema(
     verified: {
       type: Boolean,
       required: false,
+      default: false
     },
   },
   { timestamps: true }

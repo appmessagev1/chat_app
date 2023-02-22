@@ -105,7 +105,7 @@ const authController = {
         });
         await user.save();
 
-        return res.redirect("http://localhost:3000/sign_in");
+        return res.redirect(`${process.env.API_URL}/sign_in`);
       }
     } catch (err) {
       return res.status(404).json({ error_code: 102, message: "Invalid input" });

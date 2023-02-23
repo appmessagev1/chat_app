@@ -33,26 +33,30 @@ const userController = {
     }
   },
 
-  updateProfile: async (req, res, next) => { 
+  updateProfile: async (req, res, next) => {
     try {
       const id = req.params.id;
-      const data = req.body
-      const user = await User.findByIdAndUpdate({ _id: mongoose.Types.ObjectId(id) }, {
-        $set: {
-          name: data.name,
-          phoneNumber: data.phoneNumber,
-          title: data.title,
-          country: data.country,
-          avatar: data.avatar
-        }
-      })
+      const data = req.body;
+      const user = await User.findByIdAndUpdate(
+        { _id: mongoose.Types.ObjectId(id) },
+        {
+          $set: {
+            name: data.name,
+            phoneNumber: data.phoneNumber,
+            title: data.title,
+            country: data.country,
+            avatar: data.avatar,
+          },
+        },
+        { new: true }
+      );
       if (!user) return res.status(422).json({ error_code: 101, message: "Invalid input" });
-      const { _id, ...other } = user._doc
-      return res.status(200).json({ error_code: 0, data: other, message: 'Update user successfully' })
+      const { password, ...other } = user._doc;
+      return res.status(200).json({ error_code: 0, data: other, message: "Update user successfully" });
     } catch (err) {
-      return res.status(400).json({ error_code: 101, message: 'Invalid input' });
+      return res.status(400).json({ error_code: 101, message: "Invalid input" });
     }
-  }
+  },
 };
 
 module.exports = userController;

@@ -54,7 +54,18 @@ const conversationController = {
       console.log(error)
       if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
 
-      const isExits = await Conversation.findOne({ userId: req.body.userId, senderId: req.body.senderId });
+      const isExits = await Conversation.findOne({
+        $or: [
+          {
+            userId: req.body.userId,
+            senderId: req.body.senderId,
+          },
+          {
+            userId: req.body.senderId,
+            senderId: req.body.userId
+          }
+        ]
+      })
       if (isExits) return res.status(400).json({ error_code: 100, message: "Duplicate conversation" });
 
       const conversation = new Conversation({

@@ -51,7 +51,6 @@ const conversationController = {
   postConversation: async (req, res, next) => {
     try {
       const { error } = conversationValidation(req.body);
-      console.log(error)
       if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
 
       const isExits = await Conversation.findOne({

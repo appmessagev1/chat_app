@@ -17,7 +17,7 @@ POST http://localhost:8080/v1/auth/sign_in
 content-type: application/json
 
 {
-  "email": "zailaivu@gmail.com",
+  "email": "duong@gmail.com",
   "password": "duongtanbjnh2k1"
 }
 
@@ -63,3 +63,20 @@ Authorization: Berear eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2YwO
 
 ################################
 GET http://localhost:8080/v1/users/63f1a72e471d72494d211078
+
+################################
+POST http://localhost:8080/v1/tasks
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y3OGRmYzQwYjFjZDVlOTI2MDIwMDYiLCJpYXQiOjE2Nzc5MjU3MDgsImV4cCI6MTY3NzkyNzUwOH0.m5Yy6wZXK1buWv4cDLLfbEl3mEZpTpdQpmy_w5eis_M
+content-type: application/json
+
+{
+  "title": "Task1",
+  "content": "Task 1 content",
+  "userId": "63fdb3e96fdbbf66feb8f858",
+  "status": 0
+}
+
+################################
+GET http://localhost:8080/v1/tasks/63f78dfc40b1cd5e92602006
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y3OGRmYzQwYjFjZDVlOTI2MDIwMDYiLCJpYXQiOjE2Nzc5MjU3MDgsImV4cCI6MTY3NzkyNzUwOH0.m5Yy6wZXK1buWv4cDLLfbEl3mEZpTpdQpmy_w5eis_M
+content-type: application/json

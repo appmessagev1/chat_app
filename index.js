@@ -9,7 +9,8 @@ const authRoute = require("./src/routes/authRoute");
 const userRoute = require("./src/routes/userRoute");
 const messageRoute = require("./src/routes/messageRoute");
 const conversationRoute = require("./src/routes/conversationRoute");
-const uploadRoute = require("./src/routes/uploadRoute")
+const uploadRoute = require("./src/routes/uploadRoute");
+const taskRoute = require("./src/routes/taskRoute");
 
 const app = Express();
 
@@ -25,6 +26,7 @@ app.use("/v1/auth", authRoute);
 app.use("/v1/users", userRoute);
 app.use("/v1/messages", messageRoute);
 app.use("/v1/conversations", conversationRoute);
+app.use("/v1/tasks", taskRoute);
 app.use("/v1/uploads", uploadRoute);
 
 // MongoDB

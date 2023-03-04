@@ -15,7 +15,7 @@ const messageController = {
         conversationId: mongoose.Types.ObjectId(req.body.conversationId),
       });
 
-      await message.save();
+      const savedMessage = await message.save();
 
       await Conversation.updateOne(
         { _id: mongoose.Types.ObjectId(req.body.conversationId) },
@@ -26,7 +26,7 @@ const messageController = {
         }
       );
 
-      return res.status(200).json({ error_code: 0, message: "Save message success" });
+      return res.status(200).json({ error_code: 0, message: "Save message success", data: { message: savedMessage } });
     } catch (err) {
       return res.status(500).json({ error_code: 100, message: "Invalid input" });
     } 

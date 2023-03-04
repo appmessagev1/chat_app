@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const conversationSchema = new mongoose.Schema(
   {
     lastMessage: {
-      type: "string",
+      type: String,
       required: false,
       max: 1000,
     },

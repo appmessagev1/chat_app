@@ -28,9 +28,36 @@ const taskController = {
     try {
       const assigneeId = mongoose.Types.ObjectId(req.params.id);
       if (!assigneeId) return res.status(422).json({ error_code: 101, message: "Invalid input" });
-      const tasks = await Task.find({
-        assigneeId: assigneeId,
-      });
+      const tasks = await Task.aggregate([
+        {
+          $match: {
+            assigneeId: assigneeId,
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            localField: "creatorId",
+            foreignField: "_id",
+            as: "creator",
+          },
+        },
+        {
+          $project: {
+            _id: 1,
+            title: 1,
+            content: 1,
+            assigneeId: 1,
+            creatorId: 1,
+            status: 1,
+            "creator._id": 1,
+            "creator.name": 1,
+            "creator.email": 1,
+            "creator.title": 1,
+            "creator.avatar": 1,
+          },
+        },
+      ]);
 
       return res.status(200).json({ error_code: 0, message: "Get tasks successfully", data: tasks });
     } catch (err) {
@@ -66,7 +93,7 @@ const taskController = {
         {
           $set: {
             title: req.body.title,
-            content: req.body.content
+            content: req.body.content,
           },
         },
         { new: true }
@@ -75,7 +102,7 @@ const taskController = {
     } catch (err) {
       return res.status(500).json({ error_code: 100, message: "Invalid input" });
     }
-  }
+  },
 };
 
 module.exports = taskController;

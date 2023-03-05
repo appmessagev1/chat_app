@@ -1,11 +1,12 @@
 const mongoose = require("mongoose");
+const { message } = require("../utils/variables")
 
 const messageSchema = new mongoose.Schema(
   {
     content: {
       type: String,
       required: true,
-      max: 1000,
+      max: message.maxMessageLength,
     },
 
     senderId: {

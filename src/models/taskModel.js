@@ -1,16 +1,17 @@
 const mongoose = require("mongoose");
+const { task } = require("../utils/variables");
 
 const taskSchema = new mongoose.Schema(
   {
     title: {
       type: String,
       required: true,
-      max: 200,
+      max: task.maxTitleLength,
     },
     content: {
       type: String,
       required: true,
-      max: 1000,
+      max: task.maxContentLength,
     },
     userId: {
       type: mongoose.Schema.Types.ObjectId,

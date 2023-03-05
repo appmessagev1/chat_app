@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
-const { message } = require("../utils/variables")
+const { message } = require("../utils/variables");
 
-const conversationSchema = new mongoose.Schema(
+const groupSchema = new mongoose.Schema(
   {
     lastMessage: {
       type: String,
@@ -9,17 +9,19 @@ const conversationSchema = new mongoose.Schema(
       max: message.maxMessageLength,
     },
 
-    userId: {
-      type: mongoose.Schema.Types.ObjectId,
-      required: true,
-    },
-
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
+
+    memberIds: [{
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    }],
   },
-  { timestamps: true }
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = mongoose.model("Conversation", conversationSchema);
+module.exports = mongoose.model('Group', groupSchema)

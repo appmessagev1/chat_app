@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const bcrypt = require("bcrypt");
+const { user } = require("../utils/variables")
 
 const userSchema = new mongoose.Schema(
   {
@@ -7,20 +8,20 @@ const userSchema = new mongoose.Schema(
       type: String,
       unique: false,
       required: true,
-      max: 50,
+      max: user.maxNameLength,
     },
 
     email: {
       type: String,
       required: true,
       unique: true,
-      max: 50,
+      max: user.maxEmailLength,
     },
 
     title: {
       type: String,
       required: false,
-      max: 50,
+      max: user.maxTitleLength,
       default: "",
     },
 
@@ -48,8 +49,8 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: true,
-      min: 12,
-      max: 50,
+      min: user.minPasswordLength,
+      max: user.maxPasswordLength,
     },
 
     verified: {

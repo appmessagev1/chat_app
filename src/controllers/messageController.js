@@ -1,12 +1,12 @@
 const mongoose = require("mongoose");
 const Message = require("../models/messageModel");
 const Conversation = require("../models/conversationModel");
-const { messageValidation } = require("../helpers/validation/messageValidation");
+const { messageConversationValidation } = require("../helpers/validation/messageValidation");
 
 const messageController = {
-  postMessage: async (req, res, next) => {
+  postMessageInConversation: async (req, res, next) => {
     try {
-      const { error } = messageValidation(req.body);
+      const { error } = messageConversationValidation(req.body);
       if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
 
       const message = new Message({

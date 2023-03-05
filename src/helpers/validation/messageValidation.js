@@ -1,15 +1,25 @@
 const Joi = require('joi');
-const { user, message } = require("../../utils/variables");
+const { message, mongo } = require("../../utils/variables");
 
-const messageValidation = data => {
+const messageConversationValidation = data => {
   const messageSchema = Joi.object({
     content: Joi.string().required().max(message.maxMessageLength),
-    senderId: Joi.string().hex().length(user.userIdLength).required(),
-    conversationId: Joi.string().hex().length(user.userIdLength).required(),
+    senderId: Joi.string().hex().length(mongo.idLength).required(),
+    conversationId: Joi.string().hex().length(mongo.idLength).required(),
+  });
+  return messageSchema.validate(data);
+};
+
+const messageGroupValidation = data => {
+  const messageSchema = Joi.object({
+    content: Joi.string().required().max(message.maxMessageLength),
+    senderId: Joi.string().hex().length(mongo.idLength).required(),
+    groupId: Joi.string().hex().length(mongo.idLength).required(),
   });
   return messageSchema.validate(data);
 };
 
 module.exports = {
-  messageValidation: messageValidation,
+  messageConversationValidation: messageConversationValidation,
+  messageGroupValidation: messageGroupValidation,
 };

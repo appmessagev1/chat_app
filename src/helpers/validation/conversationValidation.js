@@ -1,11 +1,11 @@
 const Joi = require('joi');
-const { user, message } = require("../../utils/variables")
+const { message, mongo } = require("../../utils/variables")
 
 const conversationValidation = (data) => {
   const conversationSchema = Joi.object({
     lastMessage: Joi.string().max(message.maxMessageLength).allow(''),
-    userId: Joi.string().hex().length(user.userIdLength).required(),
-    senderId: Joi.string().hex().length(user.userIdLength).required(),
+    userId: Joi.string().hex().length(mongo.idLength).required(),
+    senderId: Joi.string().hex().length(mongo.idLength).required(),
   });
   return conversationSchema.validate(data);
 }

@@ -1,11 +1,11 @@
 const Joi = require("joi");
-const { user, message } = require("../../utils/variables");
+const { mongo, message } = require("../../utils/variables");
 
 const groupValidation = data => {
   const groupSchema = Joi.object({
     lastMessage: Joi.string().max(message.maxMessageLength).allow(""),
-    senderId: Joi.string().hex().length(user.userIdLength).required(),
-    memberIds: Joi.array().items(Joi.string().hex().length(user.userIdLength).required()),
+    senderId: Joi.string().hex().length(mongo.idLength).required(),
+    memberIds: Joi.array().items(Joi.string().hex().length(mongo.idLength).required()),
   });
   return groupSchema.validate(data);
 };

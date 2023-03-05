@@ -17,7 +17,12 @@ const messageSchema = new mongoose.Schema(
 
     conversationId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
+      required: false,
+    },
+
+    groupId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: false,
     },
   },
   { timestamps: true }

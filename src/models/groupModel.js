@@ -14,10 +14,15 @@ const groupSchema = new mongoose.Schema(
       required: true,
     },
 
-    memberIds: [{
+    name: {
+      type: String,
+      required: true,
+    },
+
+    ownerId: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'User'
-    }],
+      required: true,
+    }
   },
   {
     timestamps: true,

@@ -17,7 +17,7 @@ POST http://localhost:8080/v1/auth/sign_in
 content-type: application/json
 
 {
-  "email": "duong@gmail.com",
+  "email": "duongtanbinh2k1@gmail.com",
   "password": "duongtanbjnh2k1"
 }
 
@@ -80,3 +80,33 @@ content-type: application/json
 GET http://localhost:8080/v1/tasks/63f78dfc40b1cd5e92602006
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2Y3OGRmYzQwYjFjZDVlOTI2MDIwMDYiLCJpYXQiOjE2Nzc5MjU3MDgsImV4cCI6MTY3NzkyNzUwOH0.m5Yy6wZXK1buWv4cDLLfbEl3mEZpTpdQpmy_w5eis_M
 content-type: application/json
+
+
+################################
+POST http://localhost:8080/v1/messages/group
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZkYjNlOTZmZGJiZjY2ZmViOGY4NTgiLCJpYXQiOjE2NzgwMDU3MzEsImV4cCI6MTY3ODAwNzUzMX0.pOk1LcrNnYb8Dl9V79NmhojbtjNpiuqPWEOjtsm9U70
+content-type: application/json
+
+{
+  "content": "Hello",
+  "senderId": "63fdb3e96fdbbf66feb8f858",
+  "groupId": "64042203f1c4002d1b12e177"
+}
+
+
+################################
+POST http://localhost:8080/v1/group
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZkYjNlOTZmZGJiZjY2ZmViOGY4NTgiLCJpYXQiOjE2NzgwMDU3MzEsImV4cCI6MTY3ODAwNzUzMX0.pOk1LcrNnYb8Dl9V79NmhojbtjNpiuqPWEOjtsm9U70
+content-type: application/json
+
+{
+  "lastMessage": "Hello",
+  "senderId": "63fdb3e96fdbbf66feb8f858",
+  "ownerId": "63fdb3e96fdbbf66feb8f858",
+  "name": "Group 1"
+}
+
+
+################################
+GET http://localhost:8080/v1/group/63fdb3e96fdbbf66feb8f858
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZkYjNlOTZmZGJiZjY2ZmViOGY4NTgiLCJpYXQiOjE2NzgwMDU3MzEsImV4cCI6MTY3ODAwNzUzMX0.pOk1LcrNnYb8Dl9V79NmhojbtjNpiuqPWEOjtsm9U70

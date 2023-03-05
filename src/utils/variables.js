@@ -18,6 +18,10 @@ const variables = {
   task: {
     maxTitleLength: 200,
     maxContentLength: 1000,
+  },
+
+  group: {
+    maxNameLength: 100,
   }
 }
 

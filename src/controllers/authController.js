@@ -21,8 +21,6 @@ const authController = {
         `<a href="${process.env.SERVER_API_URL}/v1/auth/verify_email?email=${email || ""}&token=${userToken || ""}">Verify</a>`
       );
 
-      console.log(`<a href="${process.env.API_URL}/v1/auth/verify_email?email=${email || ""}&token=${userToken || ""}">Verify</a>`);
-
       return res.status(200).json({ error_code: 0, message: "Open email and validate email from app.message.mail@gmail.com"})
     } catch (err) {
       return res.status(500).json({ error_code: 100, message: "Invalid input" });

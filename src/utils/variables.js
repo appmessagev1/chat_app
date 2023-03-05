@@ -9,6 +9,7 @@ const variables = {
     maxEmailLength: 50,
     maxTitleLength: 50,
     minPasswordLength: 12,
+    maxPasswordLength: 50,
   },
 
   message: {

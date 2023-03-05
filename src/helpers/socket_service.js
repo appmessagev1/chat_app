@@ -2,7 +2,12 @@ const { Server } = require("socket.io")
 require("dotenv").config()
 
 const socketService = server => {
-  const io = new Server(server);
+  const io = new Server(server, {
+    cors: {
+      origin: process.env.CLIENT_API_URL,
+      credentials: true,
+    },
+  });
 
   const onlineUsers = {};
   io.on("connection", socket => {

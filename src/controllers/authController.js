@@ -3,6 +3,8 @@ const jwtService = require("../helpers/jwt_service");
 const User = require("../models/userModel");
 const nodemailerService = require("../helpers/nodemailer_service");
 
+const genMail = require("../utils/genMail")
+
 const authController = {
   signUp: async (req, res) => {
     try {
@@ -15,10 +17,15 @@ const authController = {
 
       const userToken = await jwtService.signEmailToken({ user: req.body });
 
+      const mailBody = genMail({
+        email: req.body.email,
+        link: `${process.env.SERVER_API_URL}/v1/auth/verify_email?email=${email || ""}&token=${userToken || ""}`,
+      });
+
       await nodemailerService.sendMail(
         email,
         "Verify mail",
-        `<a href="${process.env.SERVER_API_URL}/v1/auth/verify_email?email=${email || ""}&token=${userToken || ""}">Verify</a>`
+        mailBody
       );
 
       return res.status(200).json({ error_code: 0, message: "Open email and validate email from app.message.mail@gmail.com"})

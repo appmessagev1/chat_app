@@ -13,14 +13,18 @@ const taskSchema = new mongoose.Schema(
       required: true,
       max: task.maxContentLength,
     },
-    userId: {
+    assigneeId: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+    },
+    creatorId: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
     },
     status: {
       type: Number,
       required: true,
-    }
+    },
   },
   { timestamps: true }
 );

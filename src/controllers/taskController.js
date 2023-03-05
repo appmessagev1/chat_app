@@ -11,7 +11,8 @@ const taskController = {
       const task = new Task({
         title: req.body.title,
         content: req.body.content,
-        userId: mongoose.Types.ObjectId(req.body.userId),
+        assigneeId: mongoose.Types.ObjectId(req.body.assigneeId),
+        creatorId: mongoose.Types.ObjectId(req.body.creatorId),
         status: req.body.status,
       });
 
@@ -25,10 +26,10 @@ const taskController = {
 
   getTasks: async (req, res, next) => {
     try {
-      const userId = mongoose.Types.ObjectId(req.params.id);
-      if (!userId) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      const assigneeId = mongoose.Types.ObjectId(req.params.id);
+      if (!assigneeId) return res.status(422).json({ error_code: 101, message: "Invalid input" });
       const tasks = await Task.find({
-        userId: userId,
+        assigneeId: assigneeId,
       });
 
       return res.status(200).json({ error_code: 0, message: "Get tasks successfully", data: tasks });

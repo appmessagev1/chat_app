@@ -2,12 +2,7 @@ const { Server } = require("socket.io")
 require("dotenv").config()
 
 const socketService = server => {
-  const io = new Server(server, {
-    cors: {
-      origin: process.env.CLIENT_API_URL,
-      credentials: true,
-    },
-  });
+  const io = new Server(server);
 
   const onlineUsers = {};
   io.on("connection", socket => {
@@ -23,6 +18,16 @@ const socketService = server => {
         socket.to(sendUserSocket.socketId).emit("msg_receive", data);
       }
     });
+
+    socket.on("join_group", data => {
+      console.log(data)
+      socket.join(data.groupId)
+    })
+
+    socket.on("send_message_group", data => {
+      console.log(data)
+      socket.to(data.groupId).emit("msg_group_receive", data);
+    })
 
     socket.on("disconnect", () => {
       delete onlineUsers[socket.id];

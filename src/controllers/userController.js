@@ -2,6 +2,8 @@ const User = require("../models/userModel");
 const Message = require("../models/messageModel");
 const mongoose = require("mongoose");
 
+const { escapeRegex } = require("../utils/global");
+
 const userController = {
   getUserByIds: async (req, res, next) => {
     try {
@@ -55,6 +57,18 @@ const userController = {
       return res.status(200).json({ error_code: 0, data: other, message: "Update user successfully" });
     } catch (err) {
       return res.status(400).json({ error_code: 101, message: "Invalid input" });
+    }
+  },
+
+  getUsersByNameOrEmail: async (req, res, next) => {
+    try {
+      const { search } = req.query;
+      const regexSearch = new RegExp(escapeRegex(search), 'gi');
+      const user = await User.find({ $or: [{ name: regexSearch }, { email: regexSearch }] }, { _id: 1, password: 0 });
+      if (!user) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      return res.status(200).json({ error_code: 0, data: user, message: "Get user successfully" });
+    } catch (err) {
+      return res.status(500).json({ error_code: 100, message: "Invalid input" });
     }
   },
 };

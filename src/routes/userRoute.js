@@ -5,6 +5,7 @@ const jwtService = require("../helpers/jwt_service");
 
 const userRoute = Express.Router();
 
+userRoute.get("/", jwtService.verifyAccessToken, userController.getUsersByNameOrEmail);
 userRoute.post("/getByIds", jwtService.verifyAccessToken, userController.getUserByIds);
 userRoute.get("/:id", jwtService.verifyAccessToken, userController.getUserById);
 userRoute.put("/:id", jwtService.verifyAccessToken, userController.updateProfile);

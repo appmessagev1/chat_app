@@ -20,7 +20,7 @@ const userController = {
       );
       return res.status(200).json({ error_code: 0, data: users });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
@@ -28,10 +28,10 @@ const userController = {
     try {
       const id = req.params.id;
       const user = await User.find({ _id: mongoose.Types.ObjectId(id) }, { _id: 1, password: 0 });
-      if (!user) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!user) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       return res.status(200).json({ error_code: 0, data: user, message: "Get user successfully" });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
@@ -52,7 +52,7 @@ const userController = {
         },
         { new: true }
       );
-      if (!user) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!user) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       const { password, ...other } = user._doc;
       return res.status(200).json({ error_code: 0, data: other, message: "Update user successfully" });
     } catch (err) {
@@ -65,10 +65,10 @@ const userController = {
       const { search } = req.query;
       const regexSearch = new RegExp(escapeRegex(search), 'gi');
       const user = await User.find({ $or: [{ name: regexSearch }, { email: regexSearch }] }, { _id: 1, password: 0 });
-      if (!user) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!user) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       return res.status(200).json({ error_code: 0, data: user, message: "Get user successfully" });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 };

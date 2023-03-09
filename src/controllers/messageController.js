@@ -7,12 +7,13 @@ const messageController = {
   postMessageInConversation: async (req, res, next) => {
     try {
       const { error } = messageConversationValidation(req.body);
-      if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (error) return res.status(400).json({ error_code: 101, message: "Invalid input" });
 
       const message = new Message({
         content: req.body.content,
         senderId: mongoose.Types.ObjectId(req.body.senderId),
         conversationId: mongoose.Types.ObjectId(req.body.conversationId),
+        senderName: req.body.senderName,
       });
 
       const savedMessage = await message.save();
@@ -28,7 +29,7 @@ const messageController = {
 
       return res.status(200).json({ error_code: 0, message: "Save message success", data: { message: savedMessage } });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
@@ -45,19 +46,20 @@ const messageController = {
 
       return res.status(200).json({ error_code: 0, data: messages, message: "Get messages successfully" });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
   postMessageInGroup: async (req, res, next) => {
     try {
       const { error } = messageGroupValidation(req.body);
-      if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (error) return res.status(400).json({ error_code: 101, message: "Invalid input" });
 
       const message = new Message({
         content: req.body.content,
         senderId: mongoose.Types.ObjectId(req.body.senderId),
         groupId: mongoose.Types.ObjectId(req.body.groupId),
+        senderName: req.body.senderName,
       });
 
       const savedMessage = await message.save();
@@ -73,7 +75,7 @@ const messageController = {
 
       return res.status(200).json({ error_code: 0, message: "Save message success", data: { message: savedMessage } });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
@@ -90,7 +92,7 @@ const messageController = {
 
       return res.status(200).json({ error_code: 0, data: messages, message: "Get messages successfully" });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 };

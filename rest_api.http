@@ -96,13 +96,13 @@ content-type: application/json
 
 ################################
 POST http://localhost:8080/v1/group
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZkYjNlOTZmZGJiZjY2ZmViOGY4NTgiLCJpYXQiOjE2NzgwMDU3MzEsImV4cCI6MTY3ODAwNzUzMX0.pOk1LcrNnYb8Dl9V79NmhojbtjNpiuqPWEOjtsm9U70
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDA0YzU0ZmZjOTU3M2RmMTg1NmZiMmMiLCJpYXQiOjE2NzgzNzIxNDQsImV4cCI6MTY3ODM3Mzk0NH0.PGIu_3QZhd30898sVRbiiPgGkYRs9rLDG-olV2XhbDc
 content-type: application/json
 
 {
-  "lastMessage": "Hello",
-  "senderId": "63fdb3e96fdbbf66feb8f858",
-  "ownerId": "63fdb3e96fdbbf66feb8f858",
+  "lastMessage": "Create groups",
+  "senderId": "6404c54ffc9573df1856fb2c",
+  "ownerId": "6404c54ffc9573df1856fb2c",
   "name": "Group 1"
 }
 

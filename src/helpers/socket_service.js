@@ -25,7 +25,6 @@ const socketService = server => {
     });
 
     socket.on("join_group", data => {
-      console.log(data)
       socket.join(data.groupId)
     })
 

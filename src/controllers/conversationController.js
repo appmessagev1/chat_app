@@ -7,7 +7,7 @@ const conversationController = {
     try {
       const userId = mongoose.Types.ObjectId(req.params.id);
 
-      if (!userId) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!userId) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       const conversations = await Conversation.aggregate([
         {
           $match: {
@@ -44,14 +44,14 @@ const conversationController = {
       ]);
       return res.status(200).json({ error_code: 0, data: conversations, message: "Get conversations successfully" });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
   postConversation: async (req, res, next) => {
     try {
       const { error } = conversationValidation(req.body);
-      if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (error) return res.status(400).json({ error_code: 101, message: "Invalid input" });
 
       const isExits = await Conversation.findOne({
         $or: [
@@ -81,7 +81,7 @@ const conversationController = {
         message: "Create conversation successfully",
       });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 };

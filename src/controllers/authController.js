@@ -9,7 +9,7 @@ const authController = {
   signUp: async (req, res) => {
     try {
       const { error } = userSignUpValidate(req.body);
-      if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (error) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       const email = req.body.email.toLowerCase();
 
       const isExits = await User.findOne({ email });
@@ -30,23 +30,23 @@ const authController = {
 
       return res.status(200).json({ error_code: 0, message: "Open email and validate email from app.message.mail@gmail.com"})
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
   signIn: async (req, res, next) => {
     try {
       const { error } = userSignInValidation(req.body);
-      if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (error) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       const email = req.body.email.toLowerCase();
 
       const user = await User.findOne({ email });
-      if (!user) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!user) return res.status(400).json({ error_code: 101, message: "Invalid input" });
 
-      else if (!user.verified) return res.status(422).json({ error_code: 200, message: "You need verified email" })
+      else if (!user.verified) return res.status(400).json({ error_code: 200, message: "You need verified email" })
 
       const isValid = await user.isCheckPassword(req.body.password);
-      if (!isValid) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!isValid) return res.status(400).json({ error_code: 101, message: "Invalid input" });
 
       const accessToken = await jwtService.signAccessToken(user._id);
       const refreshToken = await jwtService.signRefreshToken(user._id);
@@ -70,11 +70,11 @@ const authController = {
     try {
       const refreshToken = req.body.refreshToken;
       if (!refreshToken) {
-        return res.status(422).json({ error_code: 101, message: "Invalid input" });
+        return res.status(400).json({ error_code: 101, message: "Invalid input" });
       }
       const { userId } = await jwtService.verifyRefreshToken(refreshToken);
       if (!userId) {
-        return res.status(422).json({ error_code: 101, message: "Invalid input" });
+        return res.status(400).json({ error_code: 101, message: "Invalid input" });
       }
 
       const accessToken = await jwtService.signAccessToken(userId);

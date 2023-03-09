@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { message } = require("../utils/variables")
+const { message, user } = require("../utils/variables")
 
 const messageSchema = new mongoose.Schema(
   {
@@ -13,6 +13,12 @@ const messageSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       required: true,
       ref: "User",
+    },
+
+    senderName: {
+      type: String, 
+      required: true,
+      max: user.maxNameLength,
     },
 
     conversationId: {

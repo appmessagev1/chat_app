@@ -1,13 +1,13 @@
 const mongoose = require("mongoose");
 const Group = require("../models/groupModel");
 const UserGroup = require("../models/userGroupModel");
-const { groupValidation } = require("../helpers/validation/groupValidation");
+const { groupValidation, addUserToGroupValidation } = require("../helpers/validation/groupValidation");
 
 const groupController = {
   getGroup: async (req, res, next) => {
     try {
       const userId = mongoose.Types.ObjectId(req.params.id);
-      if (!userId) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!userId) return res.status(400).json({ error_code: 101, message: "Invalid input" });
 
       const groups = await UserGroup.find({
         userId: userId,
@@ -19,14 +19,14 @@ const groupController = {
         data: groups,
       });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
   postGroup: async (req, res, next) => {
     try {
       const { error } = groupValidation(req.body);
-      if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (error) return res.status(400).json({ error_code: 101, message: "Invalid input" });
 
       const group = new Group({
         lastMessage: req.body.lastMessage,
@@ -52,7 +52,31 @@ const groupController = {
         message: "Saved group successfully",
       });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
+    }
+  },
+
+  addUserToGroup: async (req, res, next) => {
+    try {
+      const { error } = addUserToGroupValidation(req.body);
+      if (error) return res.status(400).json({ error_code: 101, message: "Invalid input" });
+
+      const { userIds, groupId } = req.body;
+      const groups = userIds.map(userId => {
+        return {
+          userId: mongoose.Types.ObjectId(userId),
+          groupId: mongoose.Types.ObjectId(groupId),
+        };
+      })
+      const savedGroups = await UserGroup.insertMany(groups, { ordered: false });
+      return res.status(200).json({
+        error_code: 0,
+        data: savedGroups,
+        message: 'Add user to group successfully'
+      })
+    } catch (err) {
+      console.log(err)
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 };

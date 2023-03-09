@@ -6,7 +6,7 @@ const taskController = {
   postTask: async (req, res, next) => {
     try {
       const { error } = taskValidation(req.body);
-      if (error) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (error) return res.status(400).json({ error_code: 101, message: "Invalid input" });
 
       const task = new Task({
         title: req.body.title,
@@ -20,14 +20,14 @@ const taskController = {
 
       return res.status(200).json({ error_code: 0, message: "Create Task success", data: { task: savedTask } });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
   getTasks: async (req, res, next) => {
     try {
       const assigneeId = mongoose.Types.ObjectId(req.params.id);
-      if (!assigneeId) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!assigneeId) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       const tasks = await Task.aggregate([
         {
           $match: {
@@ -61,14 +61,14 @@ const taskController = {
 
       return res.status(200).json({ error_code: 0, message: "Get tasks successfully", data: tasks });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
   updateStatus: async (req, res, next) => {
     try {
       const taskId = mongoose.Types.ObjectId(req.params.id);
-      if (!taskId) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!taskId) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       const task = await Task.findByIdAndUpdate(
         { _id: taskId },
         {
@@ -80,14 +80,14 @@ const taskController = {
       );
       return res.status(200).json({ error_code: 0, message: "Update status task successful", data: task });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 
   updateTask: async (req, res, next) => {
     try {
       const taskId = mongoose.Types.ObjectId(req.params.id);
-      if (!taskId) return res.status(422).json({ error_code: 101, message: "Invalid input" });
+      if (!taskId) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       const task = await Task.findByIdAndUpdate(
         { _id: taskId },
         {
@@ -100,7 +100,7 @@ const taskController = {
       );
       return res.status(200).json({ error_code: 0, message: "Update status task successful", data: task });
     } catch (err) {
-      return res.status(500).json({ error_code: 100, message: "Invalid input" });
+      return res.status(400).json({ error_code: 100, message: "Invalid input" });
     }
   },
 };

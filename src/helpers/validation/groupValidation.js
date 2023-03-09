@@ -19,7 +19,16 @@ const userGroupValidation = data => {
   return userGroupSchema.validate(data);
 }
 
+const addUserToGroupValidation = data => {
+  const addUserToGroupSchema = Joi.object({
+    userIds: Joi.array().items(Joi.string().hex().length(mongo.idLength).required()),
+    groupId: Joi.string().hex().length(mongo.idLength).required(),
+  });
+  return addUserToGroupSchema.validate(data)
+}
+
 module.exports = {
   groupValidation: groupValidation,
   userGroupValidation: userGroupValidation,
+  addUserToGroupValidation: addUserToGroupValidation,
 };

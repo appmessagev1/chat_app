@@ -29,7 +29,6 @@ const socketService = server => {
     })
 
     socket.on("send_message_group", data => {
-      console.log(data)
       socket.to(data.groupId).emit("msg_group_receive", data);
     })
 

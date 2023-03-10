@@ -4,7 +4,7 @@ const { mongo, message, group } = require("../../utils/variables");
 const groupValidation = data => {
   const groupSchema = Joi.object({
     lastMessage: Joi.string().max(message.maxMessageLength).allow(""),
-    senderId: Joi.string().hex().length(mongo.idLength).required(),
+    senderId: Joi.string().hex().length(mongo.idLength),
     name: Joi.string().max(group.maxNameLength).required(),
     ownerId: Joi.string().hex().length(mongo.idLength).required(),
   });

@@ -32,6 +32,23 @@ const socketService = server => {
       socket.to(data.groupId).emit("msg_group_receive", data);
     })
 
+    socket.on("invite", data => {
+      const _onlineUsers = Object.values(onlineUsers)
+      const user = _onlineUsers.find(user => user._id === data.userId);
+      if (user) {
+        socket.to(user.socketId).emit("invited", data)
+      }
+    })
+
+    socket.on("remove", data => {
+      const _onlineUsers = Object.values(onlineUsers);
+      const user = _onlineUsers.find(user => user._id === data.userId);
+      if (user) {
+        socket.to(user.socketId).emit("removed", data);
+      }
+      socket.to(data.groupId).emit("user-removed", data);
+    });
+
     socket.on("disconnect", () => {
       delete onlineUsers[socket.id];
       io.emit("online_users", onlineUsers);

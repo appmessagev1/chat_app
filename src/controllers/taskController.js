@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Task = require("../models/taskModel");
 const { taskValidation } = require("../helpers/validation/taskValidation");
+const moment = require("moment");
 
 const taskController = {
   postTask: async (req, res, next) => {
@@ -27,11 +28,17 @@ const taskController = {
   getTasks: async (req, res, next) => {
     try {
       const assigneeId = mongoose.Types.ObjectId(req.params.id);
+      const { startTime, endTime } = req.body
+
       if (!assigneeId) return res.status(400).json({ error_code: 101, message: "Invalid input" });
       const tasks = await Task.aggregate([
         {
           $match: {
             assigneeId: assigneeId,
+            createdAt: {
+              $gte: new Date(moment(startTime)),
+              $lte: new Date(moment(endTime))
+            },
           },
         },
         {

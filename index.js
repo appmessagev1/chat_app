@@ -12,6 +12,7 @@ const conversationRoute = require("./src/routes/conversationRoute");
 const groupRoute = require("./src/routes/groupRoute");
 const uploadRoute = require("./src/routes/uploadRoute");
 const taskRoute = require("./src/routes/taskRoute");
+const eventRoute = require("./src/routes/eventRoute");
 
 const app = Express();
 
@@ -30,6 +31,7 @@ app.use("/v1/conversations", conversationRoute);
 app.use("/v1/group", groupRoute);
 app.use("/v1/tasks", taskRoute);
 app.use("/v1/uploads", uploadRoute);
+app.use("/v1/events", eventRoute);
 
 // MongoDB
 mongoService.connectMongoDB();

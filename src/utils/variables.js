@@ -1,5 +1,4 @@
 const variables = {
-
   mongo: {
     idLength: 24,
   },
@@ -23,7 +22,12 @@ const variables = {
 
   group: {
     maxNameLength: 100,
-  }
-}
+  },
+
+  event: {
+    maxTitleLength: 100,
+    maxDescLength: 1000,
+  },
+};
 
 module.exports = variables;

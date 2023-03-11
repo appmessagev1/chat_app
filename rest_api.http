@@ -110,3 +110,35 @@ content-type: application/json
 ################################
 GET http://localhost:8080/v1/group/63fdb3e96fdbbf66feb8f858
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2M2ZkYjNlOTZmZGJiZjY2ZmViOGY4NTgiLCJpYXQiOjE2NzgwMDU3MzEsImV4cCI6MTY3ODAwNzUzMX0.pOk1LcrNnYb8Dl9V79NmhojbtjNpiuqPWEOjtsm9U70
+
+
+################################
+POST http://localhost:8080/v1/events
+content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDA0YzU0ZmZjOTU3M2RmMTg1NmZiMmMiLCJpYXQiOjE2Nzg1NTM5MzksImV4cCI6MTY3ODU1NTczOX0.uqfWCZwiMab8e2mjQro1xTR-kiYkR9HAH4TevpBI4E0
+
+{
+  "title": "Event1",
+  "desc": "Desc1",
+  "time": "2023-03-11T17:08:52.738+00:00",
+  "creatorId": "6404c54ffc9573df1856fb2c",
+  "memberIds": ["6404c54ffc9573df1856fb2c", "640586e576d3b3cd34868058"]
+}
+
+################################
+GET http://localhost:8080/v1/events/user/6404c54ffc9573df1856fb2c
+# content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDA0YzU0ZmZjOTU3M2RmMTg1NmZiMmMiLCJpYXQiOjE2Nzg1NTM5MzksImV4cCI6MTY3ODU1NTczOX0.uqfWCZwiMab8e2mjQro1xTR-kiYkR9HAH4TevpBI4E0
+
+
+################################
+GET http://localhost:8080/v1/events/640cb9f5874ab818f64b699e/users
+# content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDA0YzU0ZmZjOTU3M2RmMTg1NmZiMmMiLCJpYXQiOjE2Nzg1NTYwNzIsImV4cCI6MTY3ODU1Nzg3Mn0.amPd2QUM5aRQYp9QCHrdjt-YTYkvqnFhduf7BL30Mxw
+
+################################
+
+DELETE  http://localhost:8080/v1/events/640cb9f5874ab818f64b699e
+# content-type: application/json
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI2NDA0YzU0ZmZjOTU3M2RmMTg1NmZiMmMiLCJpYXQiOjE2Nzg1NTY1NTcsImV4cCI6MTY3ODU1ODM1N30.v3IJeIFTfVVaKzGmLyRiDXZTK-v6LB5gGRMBiq2DAR0
+

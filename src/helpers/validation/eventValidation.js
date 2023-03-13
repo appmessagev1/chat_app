@@ -5,7 +5,8 @@ const eventValidation = data => {
   const eventSchema = Joi.object({
     title: Joi.string().required().max(event.maxTitleLength),
     desc: Joi.string().required().max(event.maxDescLength),
-    time: Joi.date().required(),
+    start: Joi.date().required(),
+    end: Joi.date().required(),
     creatorId: Joi.string().required().length(mongo.idLength),
     memberIds: Joi.array().items(Joi.string().length(mongo.idLength)).required(),
   });

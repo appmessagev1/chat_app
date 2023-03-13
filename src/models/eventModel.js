@@ -13,7 +13,11 @@ const eventSchema = mongoose.Schema(
       required: false,
       max: event.maxDescLength,
     },
-    time: {
+    start: {
+      type: Date,
+      required: true,
+    },
+    end: {
       type: Date,
       required: true,
     },

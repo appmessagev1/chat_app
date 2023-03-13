@@ -41,7 +41,8 @@ const eventController = {
             "eventData.createdAt": 1,
             "eventData.updatedAt": 1,
             "eventData.creatorId": 1,
-            "eventData.time": 1,
+            "eventData.start": 1,
+            "eventData.end": 1,
             "userData._id": 1,
             "userData.name": 1,
             "userData.email": 1,
@@ -119,7 +120,8 @@ const eventController = {
       const event = new Event({
         title: req.body.title,
         desc: req.body.desc,
-        time: req.body.time,
+        start: req.body.start,
+        end: req.body.end,
         creatorId: mongoose.Types.ObjectId(req.body.creatorId),
       });
 

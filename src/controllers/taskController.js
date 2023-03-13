@@ -36,8 +36,8 @@ const taskController = {
           $match: {
             assigneeId: assigneeId,
             createdAt: {
-              $gte: new Date(moment(startTime)),
-              $lte: new Date(moment(endTime))
+              $gte: moment(startTime).toDate(),
+              $lte: moment(endTime).toDate()
             },
           },
         },
